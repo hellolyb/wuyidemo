@@ -23,5 +23,24 @@ const router = createRouter({
     }
   ]
 })
-
+// 全局前置路由守卫
+router.beforeEach((to, from, next) => {
+  // 获取本地token
+  const token = localStorage.getItem('token')
+  // 如果去登录页面
+  if (to.path == '/') {
+    // 有token不允许去登录页面
+    if (token) {
+      return next('/home')
+    } else {
+      // 没有toekn跳转登录页面
+      return next()
+    }
+  }
+  if (token) {
+    next() // 有token放行
+  } else {
+    next('/') // 没有返回登录页面
+  }
+})
 export default router

@@ -8,7 +8,7 @@
           <el-input v-model="ruleForm.username" />
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="ruleForm.password" />
+          <el-input v-model="ruleForm.password" show-password />
         </el-form-item>
         <el-form-item label-width="50px">
           <el-button type="primary" @click="submitForm(ruleFormRef)"> 登录</el-button>
@@ -24,7 +24,9 @@ import { ref, reactive, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import { getloginApi } from '@/utils/api'
-
+import { useCounterStore } from '@/stores/counter'
+// 仓库pinia实例
+const Test = useCounterStore()
 // 路由对象
 const route = useRoute()
 // 路由实例
@@ -44,9 +46,14 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log('submit!')
-      getloginApi(ruleForm).then((res) => {
+      getloginApi(ruleForm).then((res: any) => {
         console.log(res)
+        if (res.data.flag === true) {
+          // 存入pinia仓库
+          Test.token = res.data.data.token
+          localStorage.setItem('token', res.data.data.token)
+          router.push('/home')
+        }
       })
     } else {
       console.log('error submit!', fields)
