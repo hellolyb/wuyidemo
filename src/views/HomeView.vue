@@ -3,8 +3,11 @@
     <el-container>
       <el-header><headerTop></headerTop></el-header>
       <el-container>
-        <el-aside width="200px">Aside</el-aside>
-        <el-main>Main</el-main>
+        <el-aside width="200px"><elmenuLift></elmenuLift></el-aside>
+        <el-main>
+          <titleTop v-show="$route.name != 'homes'"></titleTop>
+          <router-view></router-view
+        ></el-main>
       </el-container>
     </el-container>
   </div>
@@ -16,6 +19,8 @@ import { ref, reactive, toRefs, watchEffect, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter'
 import headerTop from '@/components/headerTop.vue'
+import elmenuLift from '@/components/elmenuLift.vue'
+import titleTop from '@/components/titleTop.vue'
 // 仓库
 const test = useCounterStore()
 // 路由对象
@@ -23,6 +28,7 @@ const route = useRoute()
 // 路由实例
 const router = useRouter()
 const data = reactive({})
+
 // 方法部分
 watchEffect(() => {})
 // 使用toRefs解构
@@ -36,7 +42,7 @@ watchEffect(() => {})
     background-color: #2d3a4b;
   }
   .el-aside {
-    background-color: #d3dce6;
+    background-color: #545c64;
     color: #333;
     text-align: center;
     line-height: 200px;
@@ -44,9 +50,6 @@ watchEffect(() => {})
 
   .el-main {
     background-color: #e9eef3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
   }
 
   .el-container {

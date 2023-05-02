@@ -8,7 +8,39 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      children: [
+        {
+          // 首页
+          path: '/homes',
+          name: 'homes',
+          component: () => import('../views/indexView.vue')
+        },
+        {
+          // 会员
+          path: '/member',
+          name: 'member',
+          component: () => import('../views/memberView.vue')
+        },
+        {
+          // 商品
+          path: '/goods',
+          name: 'goods',
+          component: () => import('../views/goodsView.vue')
+        },
+        {
+          // 供应商
+          path: '/supplier',
+          name: 'supplier',
+          component: () => import('../views/supplierView.vue')
+        },
+        {
+          // 员工
+          path: '/staff',
+          name: 'staff',
+          component: () => import('../views/staffView.vue')
+        }
+      ]
     },
     {
       path: '/about',

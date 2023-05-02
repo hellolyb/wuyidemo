@@ -77,11 +77,11 @@ const rules = reactive<FormRules>({
 // 修改密码弹出框状态
 const dialogFormVisible = ref(false)
 // 获取用户信息
-let name = '' // 用户名
+let name = ref('') // 用户名
 let id = '' // 用户id
 getuserinfo().then((res: any) => {
   console.log(res)
-  name = res.data.data.name
+  name.value = res.data.data.name
   id = res.data.data.id
 })
 
