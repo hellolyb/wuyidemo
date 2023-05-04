@@ -9,6 +9,7 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+      redirect: 'homes',
       children: [
         {
           // 首页

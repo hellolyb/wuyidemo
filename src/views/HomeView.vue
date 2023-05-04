@@ -49,7 +49,7 @@ watchEffect(() => {})
   }
 
   .el-main {
-    background-color: #e9eef3;
+    background-color: #fff;
   }
 
   .el-container {
